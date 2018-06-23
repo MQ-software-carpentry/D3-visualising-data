@@ -29,7 +29,7 @@
           <h2 class="subtitle">Actually plotting things</h2>
 <div id="learning-objectives" class="objectives panel panel-warning">
 <div class="panel-heading">
-<h2><span class="glyphicon glyphicon-certificate"></span>Learning Objectives</h2>
+<h2 id="learning-objectives" class="objectives panel panel-warning"><span class="glyphicon glyphicon-certificate"></span>Learning Objectives</h2>
 </div>
 <div class="panel-body">
 <ul>
@@ -39,62 +39,64 @@
 </div>
 </div>
 <p>We design our axes based on our data. This means we have to know the minimum and maximum values of our data and have to decide whether we want linear or logarithmic axes.</p>
-<pre class="js"><code>// Create a logarithmic scale for the income
-var xScale = d3.scale.log(); // income
-xScale.domain([250, 1e5]); // set minimum and maximum value
-xScale.range([0, canvas_width]); // set minimum and maximum range on the page</code></pre>
-<p>D3's scale object provides a number of functions to create the scaling we want for our data. For example, we can choose between a logarithmic scale (<code>log</code>), a linear scale (<code>linear</code>), a square root scale (<code>sqrt</code>), or a categorical scale (e.g. <code>category20</code> could represent 20 different colours).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">// Create a logarithmic scale for the income</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">var</span> xScale <span class="op">=</span> <span class="va">d3</span>.<span class="at">scaleLog</span>()<span class="op">;</span> <span class="co">// income</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="va">xScale</span>.<span class="at">domain</span>([<span class="dv">250</span><span class="op">,</span> <span class="fl">1e5</span>])<span class="op">;</span> <span class="co">// set minimum and maximum value</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="va">xScale</span>.<span class="at">range</span>([<span class="dv">0</span><span class="op">,</span> canvas_width])<span class="op">;</span> <span class="co">// set minimum and maximum range on the page</span></a></code></pre></div>
+<p>D3’s scale object provides a number of functions to create the scaling we want for our data. For example, we can choose between a logarithmic scale (<code>d3.scaleLog</code>), a linear scale (<code>d3.scaleLinear</code>), a square root scale (<code>d3.scaleSqrt</code>), or a categorical scale (e.g. <code>d3.schemeCategory20</code> could represent 20 different colours).</p>
 <p>The domain consists of the data values that will get mapped to the minimum and maximum positions on the page specified by the range. Often, the domain would be set to the minimum and maximum values of the data and the range to the edges of the plotting area.</p>
 <p>Instead of spreading this code over three lines, we often find another notation online that achieves the same thing:</p>
-<pre class="js"><code>var xScale = d3.scale.log().domain([300, 1e5]).range([0, canvas_width]);  </code></pre>
-<p>These two notations are interchangeable and it is entirely up to you to use the one that seems more intuitive to you. In the same way that we could switch setting up the domain and range in the more verbose notation, we can swap these two in the shorter notation without it making any difference.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">var</span> xScale <span class="op">=</span> <span class="va">d3</span>.<span class="at">scaleLog</span>().<span class="at">domain</span>([<span class="dv">300</span><span class="op">,</span> <span class="fl">1e5</span>]).<span class="at">range</span>([<span class="dv">0</span><span class="op">,</span> canvas_width])<span class="op">;</span></a></code></pre></div>
+<p>These two notations are interchangeable and it is entirely up to you to use the one that seems more intuitive to you.</p>
+<p>In the same way that we could switch setting up the domain and range in the more verbose notation, we can swap these two in the shorter notation without it making any difference.</p>
 <p>The next step is to create the actual axis and linking it to the scale we just created:</p>
-<pre class="js"><code>// Creating the x &amp; y axes.
-var xAxis = d3.svg.axis().orient(&quot;bottom&quot;).scale(xScale);</code></pre>
-<p>We also want to orient it horizontally, at the bottom of our canvas.</p>
-<p>So far, the xAxis exists, but it's not actually showing up anywhere on the page. To push the axis to our canvas, we create a new group element (using <code>.append</code>).</p>
-<pre class="js"><code>// Add the x-axis.
-canvas.append(&quot;g&quot;)
-    .attr(&quot;class&quot;, &quot;x axis&quot;)
-  .attr(&quot;transform&quot;, &quot;translate(0,&quot; + canvas_height + &quot;)&quot;)
-  .call(xAxis);</code></pre>
-<p><code>.call</code> calls the axis we just created and pushed it to the element. We add a transform attribute to move the axis to the bottom of the plotting area (instead of having it across the top). There are a number of transform options, but here we are just using <code>translate</code> and pass in the amount to shift the axis in the x and y directions, respectively. Here we shift it only in the y direction (i.e. down) by an amount given by height of the canvas.<br />We also give it a class, just in case we might want to select the axis later in our code.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">// Creating the x axis.</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">var</span> xAxis <span class="op">=</span> <span class="va">d3</span>.<span class="at">axisBottom</span>(xScale)<span class="op">;</span></a></code></pre></div>
+<p><code>axisBottom</code> influences the orientation of the axis and the <em>position of the ticks</em>: on the bottom. Other options are also available: <code>axisTop</code>, <code>axisLeft</code>, and <code>axisRight</code>. We will still need to position it inside the canvas.</p>
+<p>So far, the x axis exists, but it’s not actually showing up anywhere on the page. To push the axis to our canvas, we create a new group element (using <code>.append</code>).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co">// Add the x-axis.</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="va">canvas</span>.<span class="at">append</span>(<span class="st">&quot;g&quot;</span>)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">    .<span class="at">attr</span>(<span class="st">&quot;class&quot;</span><span class="op">,</span> <span class="st">&quot;x axis&quot;</span>)</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  .<span class="at">attr</span>(<span class="st">&quot;transform&quot;</span><span class="op">,</span> <span class="st">&quot;translate(0,&quot;</span> <span class="op">+</span> canvas_height <span class="op">+</span> <span class="st">&quot;)&quot;</span>)</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  .<span class="at">call</span>(xAxis)<span class="op">;</span></a></code></pre></div>
+<p><code>.call</code> calls the axis we just created and pushed it to the element. We add a transform attribute to move the axis to the bottom of the plotting area (instead of having it across the top). There are a number of transform options, but here we are just using <code>translate</code> and pass in the amount to shift the axis in the x and y directions, respectively. Here we shift it only in the y direction (i.e. down) by an amount given by height of the canvas. We also give it a class, just in case we might want to select the axis later in our code.</p>
 <div id="we-might-need-a-y-axis-too" class="challenge panel panel-success">
 <div class="panel-heading">
-<h1><span class="glyphicon glyphicon-pencil"></span>We might need a y-axis, too</h1>
+<h1 id="we-might-need-a-y-axis-too" class="challenge panel panel-success"><span class="glyphicon glyphicon-pencil"></span>We might need a y-axis, too</h1>
 </div>
 <div class="panel-body">
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Create a linear scale for the y-axis, with 10 being the minimum and 85 being the maximum value. Then, add the axis to the canvas.</li>
 </ol>
 </div>
 </div>
-<p>We're slowly getting there. Having our two axes, we can now finally add our data.</p>
-<p>And now we're ready to add one circle per data point! We don't want to see all the data at once for now. Let's instead just look at the most recent data point (data for 2009).</p>
+<p>We’re slowly getting there. Having our two axes, we can now finally add our data.</p>
+<p>And now we’re ready to add one circle per data point! We don’t want to see all the data at once for now. Let’s instead just look at the most recent data point (data for 2009).</p>
 <p><img src="img/data_structure.png" alt="data structure" width="500" /></p>
-<pre class="js"><code>var data_canvas = canvas.append(&quot;g&quot;)
-  .attr(&quot;class&quot;, &quot;data_canvas&quot;);
-
-var dot = data_canvas.selectAll(&quot;.dot&quot;)
-  .data(nations, function(d){return d.name});
-
-dot.enter().append(&quot;circle&quot;).attr(&quot;class&quot;,&quot;dot&quot;)
-  .attr(&quot;cx&quot;, function(d) { return xScale(d.income[d.income.length-1]); })
-  .attr(&quot;cy&quot;, function(d) { return yScale(d.lifeExpectancy[d.lifeExpectancy.length-1]); })
-  .attr(&quot;r&quot;, 5);</code></pre>
-<p>We're starting this bit by adding a <code>g</code> element to our canvas. This group is going to be our data canvas, so that's the class name we give it. We then select everything of the class <code>dot</code>. This is an empty set at the moment, since we haven't created any dots, yet. We are then telling our page where to find the data, using <code>.data(nations)</code>.</p>
-<p>We are also inserting what is called a key function <code>.data(nations, function(d){return d.name});</code>. This function will help D3 keep track of the data when we start changing it (and the order of the objects). It's important to keep the identifier unique, which is why we return only the name of the current element.</p>
-<p>Now comes the interesting part: The function <code>enter()</code> takes each element in the dataset and does everything that follows afterwards for each of these elements we're adding in. These new dots need to be added with the class 'dot', so that next time we call <code>data_canvas.selectAll(&quot;.dot&quot;)</code> we get the dots that have already been added to our plot.</p>
-<p>What we want to do is to create one circle for each data point. That's what the last four lines of code do. They are creating the circle, and then setting the attributes <code>cx</code>, <code>cy</code>, and <code>r</code>. The attributes <code>cx</code> and <code>cy</code> define the position of the centre of the circle and are based on the income (we are looking at the most recent data point: <code>[nation.income.length-1]</code>.) and life expectancy of the data point (that is temporarily called <code>d</code>). The radius is set to an arbitrary number... for now.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">var</span> data_canvas <span class="op">=</span> <span class="va">canvas</span>.<span class="at">append</span>(<span class="st">&quot;g&quot;</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  .<span class="at">attr</span>(<span class="st">&quot;class&quot;</span><span class="op">,</span> <span class="st">&quot;data_canvas&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw">var</span> dot <span class="op">=</span> <span class="va">data_canvas</span>.<span class="at">selectAll</span>(<span class="st">&quot;.dot&quot;</span>)</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">  .<span class="at">data</span>(nations<span class="op">,</span> <span class="kw">function</span>(d)<span class="op">{</span><span class="cf">return</span> <span class="va">d</span>.<span class="at">name</span><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="va">dot</span>.<span class="at">enter</span>().<span class="at">append</span>(<span class="st">&quot;circle&quot;</span>).<span class="at">attr</span>(<span class="st">&quot;class&quot;</span><span class="op">,</span><span class="st">&quot;dot&quot;</span>)</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">  .<span class="at">attr</span>(<span class="st">&quot;cx&quot;</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">xScale</span>(<span class="va">d</span>.<span class="at">income</span>[<span class="va">d</span>.<span class="va">income</span>.<span class="at">length</span><span class="dv">-1</span>])<span class="op">;</span> <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">  .<span class="at">attr</span>(<span class="st">&quot;cy&quot;</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">yScale</span>(<span class="va">d</span>.<span class="at">lifeExpectancy</span>[<span class="va">d</span>.<span class="va">lifeExpectancy</span>.<span class="at">length</span><span class="dv">-1</span>])<span class="op">;</span> <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">  .<span class="at">attr</span>(<span class="st">&quot;r&quot;</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">;</span></a></code></pre></div>
+<p>We’re starting this bit by adding a <code>g</code> element to our canvas. This group is going to be our data canvas, so that’s the class name we give it. We then select everything of the class <code>dot</code>. This is an empty set at the moment, since we haven’t created any dots, yet. We are then telling our page where to find the data, using <code>.data(nations)</code>.</p>
+<p>We are also inserting what is called a key function <code>.data(nations, function(d){return d.name});</code>. This function will help D3 keep track of the data when we start changing it (and the order of the objects). It’s important to keep the identifier unique, which is why we return only the name of the current element.</p>
+<p>Now comes the interesting part: The function <code>enter()</code> takes each element in the dataset and does everything that follows afterwards for each of these elements we’re adding in. These new dots need to be added with the class ‘dot’, so that next time we call <code>data_canvas.selectAll(&quot;.dot&quot;)</code> we get the dots that have already been added to our plot.</p>
+<p>What we want to do is to create one circle for each data point. That’s what the last four lines of code do. They are creating the circle, and then setting the attributes <code>cx</code>, <code>cy</code>, and <code>r</code>. The attributes <code>cx</code> and <code>cy</code> define the position of the centre of the circle and are based on the income (we are looking at the most recent data point: <code>[nation.income.length-1]</code>.) and life expectancy of the data point (that is temporarily called <code>d</code>). The radius is set to an arbitrary number… for now.</p>
 <div id="a-new-dimension" class="challenge panel panel-success">
 <div class="panel-heading">
-<h1><span class="glyphicon glyphicon-pencil"></span>A new dimension</h1>
+<h1 id="a-new-dimension" class="challenge panel panel-success"><span class="glyphicon glyphicon-pencil"></span>A new dimension</h1>
 </div>
 <div class="panel-body">
-<p>Change the code so that the radius of the circles represents the population. First, create a 'sqrt' scale with a minimum of 0 and a maximum of 5e8. The range should be between 0 and 40. </p>
+<p>Change the code so that the radius of the circles represents the population. First, create a ‘sqrt’ scale with a minimum of 0 and a maximum of 5e8. The range should be between 0 and 40.</p>
 </div>
 </div>
-<iframe src="code/index08.html" width="1000" height="600"></iframe>
+<iframe src="code/index08.html" width="1000" height="600">
+</iframe>
         </div>
       </div>
       <div class="footer">

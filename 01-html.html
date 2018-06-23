@@ -29,7 +29,7 @@
           <h2 class="subtitle">Making things appear in your browser</h2>
 <div id="learning-objectives" class="objectives panel panel-warning">
 <div class="panel-heading">
-<h2><span class="glyphicon glyphicon-certificate"></span>Learning Objectives</h2>
+<h2 id="learning-objectives" class="objectives panel panel-warning"><span class="glyphicon glyphicon-certificate"></span>Learning Objectives</h2>
 </div>
 <div class="panel-body">
 <ul>
@@ -42,43 +42,69 @@
 <p>A way of writing that is understood by all web browsers is HTML: hypertext markup language. Since we don’t have the ability to do logical operations (loops, etc.) with HTML alone, it’s not technically a programming language.</p>
 <p>Let’s see how we can get our browser to greet the world. We need to:</p>
 <ul>
-<li>Create a local folder 'my_first_webpage'</li>
-<li>In the folder, create the file 'index.html'</li>
+<li>Create a local folder <code>gapminder_datavis</code></li>
+<li>In the folder, create the file <code>index.html</code></li>
 <li>Open the file with a text editor</li>
 </ul>
 <p>Now, if we want to open our new file in a browser, we have to tell it what kind of file to expect. To do this, we start our file with:</p>
-<pre class="sourceCode html"><code class="sourceCode html"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
-<span class="kw">&lt;html&gt;</span>
-    --&gt; Everything goes in here <span class="er">&lt;</span>--
-<span class="kw">&lt;/html&gt;</span> </code></pre>
-<p>Every good webpage consists of a head and a body. The header (&lt;head&gt; to open and &lt;/head&gt; to close) normally contains any meta-data. This could be name of the page or the inclusion of other files.</p>
-<p>The body (&lt;body&gt; to open and &lt;/body&gt; to close) is where all our content should go. So everything we type between the brackets will be displayed on our page.</p>
-<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;head&gt;</span>
-<span class="kw">&lt;/head&gt;</span>
-<span class="kw">&lt;body&gt;</span>
-    Hello world!
-<span class="kw">&lt;/body&gt;</span> </code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">&lt;html&gt;</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">    <span class="co">&lt;!-- Everything goes in here --&gt;</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<p>Comments (ignored by the browser) starts with <code>&lt;!--</code> and ends with <code>--&gt;</code>.</p>
+<p>Every good webpage consists of a head and a body. The header (<code>&lt;head&gt;</code> to open and <code>&lt;/head&gt;</code> to close) normally contains any meta-data. This could be name of the page or the inclusion of other files.</p>
+<p>The body (<code>&lt;body&gt;</code> to open and <code>&lt;/body&gt;</code> to close) is where all our content should go. So everything we type between the brackets will be displayed on our page.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">    Hello, world!</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">&lt;/body&gt;</span></a></code></pre></div>
 <p>Since our browser understands this language, we can instantly open our local index.html file and the browser will interpret our code as visual components.</p>
-<p>HTML has more predefined elements that will vary in size and style. To divide the page into different section, we can create a division using &lt;div&gt; to open and &lt;/div&gt; to close it.</p>
-<pre class="sourceCode html"><code class="sourceCode html"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
-<span class="kw">&lt;html&gt;</span>
-    <span class="kw">&lt;head&gt;</span>
-        --&gt; meta-data (like page title, inclusion of other files) <span class="er">&lt;</span>--
-    <span class="kw">&lt;/head&gt;</span>
-    <span class="kw">&lt;body&gt;</span>
-        <span class="kw">&lt;div&gt;</span>Hello world!<span class="kw">&lt;/div&gt;</span>
-        <span class="kw">&lt;div&gt;</span>Hello back!<span class="kw">&lt;/div&gt;</span>
-    <span class="kw">&lt;/body&gt;</span>
-<span class="kw">&lt;/html&gt;</span> </code></pre>
-<div id="other-elements" class="challenge panel panel-success">
+<p>HTML has more predefined elements that will vary in size and style. To divide the page into different section, we can create a division using <code>&lt;div&gt;</code> to open and <code>&lt;/div&gt;</code> to close it.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">&lt;html&gt;</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">    <span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">        <span class="co">&lt;!-- meta-data (like page title, inclusion of other files) --&gt;</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">    <span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">    <span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">        <span class="kw">&lt;div&gt;</span>Hello, world!<span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">        <span class="kw">&lt;div&gt;</span>Hi world, I&#39;m dad!<span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">    <span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<p>HTML offers many useful typographical elements. Here are a few common ones:</p>
+<ul>
+<li><code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>, and so on</li>
+<li><code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code></li>
+<li><code>&lt;blockquote&gt;</code> and <code>&lt;pre&gt;</code></li>
+</ul>
+<p>We can also insert a title for our browser page, as below:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">&lt;html&gt;</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  <span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">    <span class="co">&lt;!-- meta-data (like page title, inclusion of other files) --&gt;</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">    <span class="kw">&lt;title&gt;</span>My first webpage!<span class="kw">&lt;/title&gt;</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">  <span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">  <span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">    <span class="kw">&lt;div&gt;&lt;strong&gt;</span>Hello, world!<span class="kw">&lt;/strong&gt;&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">    <span class="kw">&lt;div&gt;&lt;em&gt;</span>Hi world, I&#39;m dad!<span class="kw">&lt;/em&gt;&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">  <span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<p>Try the following tasks to make yourself more comfortable with HTML. You will find the search engine useful if you are not sure how to do it. Feel free to ask for help!</p>
+<div id="your-turn-getting-the-webpage-started" class="challenge panel panel-success">
 <div class="panel-heading">
-<h2><span class="glyphicon glyphicon-pencil"></span>Other elements</h2>
+<h2 id="your-turn-getting-the-webpage-started" class="challenge panel panel-success"><span class="glyphicon glyphicon-pencil"></span>Your turn: Getting the webpage started</h2>
 </div>
 <div class="panel-body">
-<p>Create a folder that contains the file index.html (or download it). What seems to be the difference between &lt;div&gt;, &lt;h1&gt;, and &lt;em&gt;? What about the difference between two &lt;div&gt; elements and two &lt;span&gt; elements? Create a heading that is in italics. Never be afraid to google to find out how to use certain elements and find out about the syntax!</p>
+<ol type="1">
+<li>Create a heading for the page, and call it “The Wealth &amp; Health of Nations”.</li>
+<li>Make the heading in italics.</li>
+<li>Credit Gapminder data by creating a hyperlink back to their website. Use the text “Data source: Gapminder”.</li>
+</ol>
 </div>
 </div>
-<p>Useful resources are also the mozilla developer network (<a href="https://developer.mozilla.org/en-US/">MDN</a>) and <a href="http://www.w3schools.com">w3school</a>.</p>
+<p>Useful resources are also the <a href="https://developer.mozilla.org/en-US/">MDN documentation</a> and <a href="http://www.w3schools.com">w3school</a>.</p>
+<p>You are also encouraged to use the Developer Tools in your browser (Ctrl+Shift+I on Windows, or Cmd+Options+I on MacOS) to inspect sources of HTML and see how others work.</p>
+<p>Another way to get to the Developer Tools is right-click on any element on the page and select ‘Inspect element’. It should open and you should be in the ‘Elements’ tab. Here, you can navigate through the HTML file and inspect properties at the same time.</p>
         </div>
       </div>
       <div class="footer">
