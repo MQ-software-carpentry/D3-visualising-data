@@ -7,7 +7,7 @@ title: Visualising your data on the web using D3
 
 **Contact:** xavier.ho@data61.csiro.au
 
-**Etherpad:** <http://pad.software-carpentry.org/ResBaz2018-D3>
+**Etherpad:** [http://pad.software-carpentry.org/ResBaz2018-D3](http://pad.software-carpentry.org/ResBaz2018-D3)
 
 Open science should be visible science. What better way is there to make your 
 research visible and accessible than to put it on the internet. However, no one 
