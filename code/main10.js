@@ -1,6 +1,6 @@
 // Load the data.
-var dataUrl = "https://raw.githubusercontent.com/IsaKiko/D3-visualising-data/gh-pages/code/nations.json";
-d3.json(dataUrl, function(nations) {
+var dataUrl = "https://raw.githubusercontent.com/MQ-software-carpentry/D3-visualising-data/gh-pages/code/nations.json";
+d3.json(dataUrl).then(function(nations) {
 
 	var filtered_nations = nations.map(function(nation) { return nation; });
 	var year_idx = Number(document.getElementById("year_slider").value) - 1950;
@@ -47,13 +47,13 @@ d3.json(dataUrl, function(nations) {
 	xScale.range([0, canvas_width]);
 
 	// d3 has a subobject called scale. within scale, there are a number of functions to create scales.
-	// e.g. scaleLog, scaleLinear, scaleSqrt, d3.schemeCategory20 (e.g. 20 different colours)...
+	// e.g. scaleLog, scaleLinear, scaleSqrt, d3.schemeCategory10 (e.g. 20 different colours)...
 	// we set the domain based on our data - min and max of the data
 	// we set the range - range on the page
 	// domain, range, log scale all determing data values are mapped to graph positions.
 
 	var yScale = d3.scaleLinear().domain([10, 85]).range([canvas_height, 0]);  // life expectancy
-	var colorScale = d3.scaleOrdinal(d3.schemeCategory20);
+	var colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
 	// an alternative notation that d3 offers is to chain everything together using the dot-syntax
 	// (you'll see this a lot). The order is mostly arbitrary.

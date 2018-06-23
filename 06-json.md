@@ -12,9 +12,8 @@ minutes: 20
 > * Converting JSON data to JavaScript format
 
 The goal of these lessons is to visualize data.
-So far we haven't really dealt with any specific data, let alone
-relatively big data files.
-In this lesson, we will learn about the basic data types used
+So far we haven't really dealt with any specific data, let alone relatively big
+data files. In this lesson, we will learn about the basic data types used
 by JavaScript and also talk about ways to conveniently convert
 variables into a text file so we can store it.
 
@@ -109,9 +108,14 @@ This process is called 'nesting'.
 > 2. Look at cat_object. What's going on??
 
 In Javascript, we have a name space and an object space.
-The name space contains the names of the variables, the object space contains the actual content.
-Normally, you would assume that each name points to one object (`cat_object.weight` --> `5`, `cat_object.name` --> 'Princess Caroline'). What we did, when we created our list is that we used three names to point to the same object (`cat_list[0]`, `cat_list[1]`, `cat_object` --> `{weight = 5 , past_weight_values = [4.5, 5.1, 4.9], name = 'Princess Caroline'}`).
-When we changed the name of `cat_list2[0]`, what we actually did was changing the content of the one object `cat_object` that they were all pointing to.
+
+The name space contains the names of the variables, the object space contains 
+the actual content. Normally, you would assume that each name points to one 
+object (`cat_object.weight` --> `5`, `cat_object.name` --> 'Princess Caroline').
+What we did, when we created our list is that we used three names to point to
+the same object (`cat_list[0]`, `cat_list[1]`, `cat_object` --> `{weight = 5 , past_weight_values = [4.5, 5.1, 4.9], name = 'Princess Caroline'}`). When we changed the name of `cat_list2[0]`, what we
+actually did was changing the content of the one object `cat_object` that they
+were all pointing to.
 
 <img src="img/namespace.png" alt="Name space and object space" width="500" />
 
@@ -120,10 +124,10 @@ name for the same one) that relates to an array we already have
 can be done using the `map()` function.
 
 As an example, we can create a list of dogs that have the same names as
-our cats, only appended by "Doggie ".
+our cats, only appended by `"Doggie "`.
 
 ~~~{.js}
-dog_list = cat_list.map(function(cat) {
+var dog_list = cat_list.map(function(cat) {
 	return {
 		name: "Doggie "+ cat.name
 	};
@@ -155,7 +159,8 @@ read it in later.
 At this stage, we can't really create a file, because we're in a browser
 and creating files would make it too easy to program a virus.
 
-So instead, let's have a look at our stringified variable using the `alert()` function:
+So instead, let's have a look at our stringified variable using the `alert()` 
+function:
 
 ~~~{.js}
 alert(cat_json);
@@ -172,14 +177,15 @@ We could now copy this string and save it manually in a `.json` file.
 > ## De-stringify  {.challenge}
 > Let's assume we read in a JSON formatted string from a file and want to
 > retrieve the nice structure. This process is called parsing and we can
-> use the JSON.parse() function. Convert the variable `cat_json` back and store it in a
-> container called `new_cat_list`.
+> use the JSON.parse() function. Convert the variable `cat_json` back and store
+> it in a container called `new_cat_list`.
 
 We are now at a stage where we can have a look at the data file that we
 want to work with. Open 'nations.json'.
 
-Here is a snap-shot of our data. We have data from 10 different countries, describing income per capita, population, and life expectancy for different years between 1800 and 2009.
-Source: [gapminder](http://www.gapminder.org/data/)
+Here is a snap-shot of our data. We have data from 10 different countries,
+describing income per capita, population, and life expectancy for different
+years between 1800 and 2009. Source: [gapminder](http://www.gapminder.org/data/)
 
 ~~~{.out}
 [

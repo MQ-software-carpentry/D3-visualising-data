@@ -53,20 +53,20 @@
 <a class="sourceLine" id="cb1-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb1-9" data-line-number="9">    <span class="kw">&lt;h1&gt;</span>The Wealth <span class="er">&amp;</span> Health of Nations<span class="kw">&lt;/h1&gt;</span></a>
 <a class="sourceLine" id="cb1-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">    <span class="kw">&lt;p</span><span class="ot"> id=</span><span class="st">&quot;chart_area&quot;</span><span class="kw">&gt;&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">    <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;chart_area&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></a>
 <a class="sourceLine" id="cb1-12" data-line-number="12"></a>
 <a class="sourceLine" id="cb1-13" data-line-number="13">    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;https://d3js.org/d3.v4.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a>
 <a class="sourceLine" id="cb1-14" data-line-number="14">    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;main.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a>
 <a class="sourceLine" id="cb1-15" data-line-number="15">  <span class="kw">&lt;/body&gt;</span></a>
 <a class="sourceLine" id="cb1-16" data-line-number="16"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
 <p>There are a few things in this file that look new: <code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;main.css&quot; /&gt;</code> is linking the local CSS file <code>main.css</code>(that can just be an empty file for now). <code>&lt;script src=&quot;main.js&quot;&gt;&lt;/script&gt;</code> is linking the JavaScript file, the file in which all the action will happen.</p>
-<p>Additionally, we now need to link d3 using <code>&lt;script src=&quot;https://d3js.org/d3.v4.min.js&quot;&gt;&lt;/script&gt;</code>. The order matters. Since code is executed sequentially and we want to use parts of the D3 library in our own script, we have to link to d3.js first.</p>
+<p>Additionally, we now need to link d3 using <code>&lt;script src=&quot;https://d3js.org/d3.v5.min.js&quot;&gt;&lt;/script&gt;</code>. The order matters. Since code is executed sequentially and we want to use parts of the D3 library in our own script, we have to link to d3.js first.</p>
 <p>The last bit, that’s important here is an HTML element (paragraph) we create. We give it an id <code>chart_area</code>. This is the area we reserve for our pretty chart. We will use JavaScript (and D3) to fill it in.</p>
 <p>Now, let’s write main.js.</p>
 <p>Similar to the syntax we’ve already seen (<code>JSON.stringify</code>), D3-specific functions can be called using a <code>d3.</code>-syntax.</p>
-<p>The first thing we need, is of course our data, which we can find at ‘https://raw.githubusercontent.com/IsaKiko/D3-visualising-data/gh-pages/code/nations.json’. D3 provides a handy function to read in <code>json</code>-files:</p>
-<pre class="d3"><code>var dataUrl = &quot;https://raw.githubusercontent.com/IsaKiko/D3-visualising-data/gh-pages/code/nations.json&quot;;
-d3.json(dataUrl, function(nations) { })</code></pre>
+<p>The first thing we need, is of course our data, which we can find at ‘https://raw.githubusercontent.com/MQ-software-carpentry/D3-visualising-data/gh-pages/code/nations.json’. D3 provides a handy function to read in <code>json</code>-files:</p>
+<pre class="d3"><code>var dataUrl = &quot;https://raw.githubusercontent.com/MQ-software-carpentry/D3-visualising-data/gh-pages/code/nations.json&quot;;
+d3.json(dataUrl).then(function(nations) { /* ... */ });</code></pre>
 <p>This line probably needs a little explanation and we’ll go through it bit by bit:</p>
 <ul>
 <li><code>d3.json()</code> is called the function call. In this case, we have a function that reads in a json file, parses it, and is also able to do something with the parsed data on the way.</li>
@@ -94,7 +94,7 @@ d3.json(dataUrl, function(nations) { })</code></pre>
 <p><img src="img/chart_area.png" alt="What we want.." width="700" /></p>
 <p>We already set up our HTML page to contain a chart area. That’s the space we want to fill now. We’ll have a picture frame (an SVG-element), our drawing area (a g-element), and in that drawing area, we’ll have separate elements for both axes and the area for our circles.</p>
 <p>What we now want to end up with in our html document is this:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">&lt;p</span><span class="ot"> id=</span><span class="st">&quot;chart_area&quot;</span><span class="kw">&gt;</span> <span class="kw">&lt;svg&gt;</span> <span class="kw">&lt;/svg&gt;</span> <span class="kw">&lt;/p&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;chart_area&quot;</span><span class="kw">&gt;</span> <span class="kw">&lt;svg&gt;</span> <span class="kw">&lt;/svg&gt;</span> <span class="kw">&lt;/div&gt;</span></a></code></pre></div>
 <p>But this time, we want to create these elements automatically using JavaScript only. First, we need to link the JavaScript and HTML environment so that we have writing access to the HTML. To do this, we use the <code>.select()</code>. This lets us grab an element by specifying its ID.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co">// Select the chart area by ID</span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">var</span> chart_area <span class="op">=</span> <span class="va">d3</span>.<span class="at">select</span>(<span class="st">&quot;#chart_area&quot;</span>)<span class="op">;</span></a></code></pre></div>

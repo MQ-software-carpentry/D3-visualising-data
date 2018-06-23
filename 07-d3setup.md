@@ -32,7 +32,7 @@ Then create `index.html` in the new repository containing the following:
 
     <h1>The Wealth & Health of Nations</h1>
 
-    <p id="chart_area"></p>
+    <div id="chart_area"></div>
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="main.js"></script>
@@ -43,7 +43,7 @@ Then create `index.html` in the new repository containing the following:
 There are a few things in this file that look new:
 `<link rel="stylesheet" type="text/css" href="main.css" />` is linking the local CSS file `main.css`(that can just be an empty file for now). `<script src="main.js"></script>` is linking the JavaScript file, the file in which all the action will happen.
 
-Additionally, we now need to link d3 using `<script src="https://d3js.org/d3.v4.min.js"></script>`. The order matters. Since code is executed sequentially and we want to use parts of the D3 library in our own script, we have to link to d3.js first.
+Additionally, we now need to link d3 using `<script src="https://d3js.org/d3.v5.min.js"></script>`. The order matters. Since code is executed sequentially and we want to use parts of the D3 library in our own script, we have to link to d3.js first.
 
 The last bit, that's important here is an HTML element (paragraph) we create. We give it an id `chart_area`. This is the area we reserve for our pretty chart. We will use JavaScript (and D3) to fill it in.
 
@@ -52,12 +52,12 @@ Now, let's write main.js.
 
 Similar to the syntax we've already seen (`JSON.stringify`), D3-specific functions can be called using a `d3.`-syntax.
 
-The first thing we need, is of course our data, which we can find at 'https://raw.githubusercontent.com/IsaKiko/D3-visualising-data/gh-pages/code/nations.json'.
+The first thing we need, is of course our data, which we can find at 'https://raw.githubusercontent.com/MQ-software-carpentry/D3-visualising-data/gh-pages/code/nations.json'.
 D3 provides a handy function to read in `json`-files:
 
 ~~~{.d3}
-var dataUrl = "https://raw.githubusercontent.com/IsaKiko/D3-visualising-data/gh-pages/code/nations.json";
-d3.json(dataUrl, function(nations) { })
+var dataUrl = "https://raw.githubusercontent.com/MQ-software-carpentry/D3-visualising-data/gh-pages/code/nations.json";
+d3.json(dataUrl).then(function(nations) { /* ... */ });
 ~~~
 
 This line probably needs a little explanation and we'll go through it bit by bit:
@@ -71,7 +71,6 @@ This line probably needs a little explanation and we'll go through it bit by bit
 
 > ## What else can I read in conveniently? {.callout}
 > D3 offers the possibility to also read in csv (comma-separated values) files directly. See [here](https://github.com/mbostock/d3/wiki/CSV) for an example. Also available are functions to read in tab-separated values (tsv) and files with arbitrary delimiter (dsv).
-
 
 
 So naturally, the next step is to think about what we want to happen between the curly brackets.
@@ -94,7 +93,7 @@ that drawing area, we'll have separate elements for both axes and the area for o
 What we now want to end up with in our html document is this:
 
 ~~~{.html}
-<p id="chart_area"> <svg> </svg> </p>
+<div id="chart_area"> <svg> </svg> </div>
 ~~~
 
 But this time, we want to create these elements automatically using JavaScript only.
