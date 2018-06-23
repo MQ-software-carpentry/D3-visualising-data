@@ -3,6 +3,10 @@ layout: page
 title: Visualising your data on the web using D3
 ---
 
+**Instructor:** Xavier Ho
+
+**Contact:** xavier.ho@data61.csiro.au
+
 Open science should be visible science. What better way is there to make your 
 research visible and accessible than to put it on the internet. However, no one 
 wants to read endless tables of data. We’d rather look at graphs, or, even 
