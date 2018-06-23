@@ -66,5 +66,5 @@ In order to make this example slightly easier, we interpolated the data. The
 data files can be found [here](https://github.com/IsaKiko/D3-visualising-data/blob/gh-pages/code/nations.json).
 
 Lessons created by [Isabell Kiral-Kornek](https://github.com/isakiko) and 
-[Robert Kerr](https://github.com/robrkerr), and upgraded to v5 by 
+[Robert Kerr](https://github.com/robrkerr). Course upgraded to v4 and v5 by 
 [Xavier Ho](https://github.com/Spaxe).
