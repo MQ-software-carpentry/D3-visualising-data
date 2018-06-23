@@ -11,13 +11,24 @@ minutes: 20
 > * Passing HTML element tags to JavaScript
 > * Manipulating HTML elements using JavaScript
 
-We've learned how to integrate text and graphical objects into our page and we also know how to publish it.
-So far, we might as well just create a plot elsewhere and publish it as an image. But wouldn't it be much better, if the user could interact with the data? To do that, we need to learn a little scripting, and, again, HTML provides a scripting environment.
-Everything between &lt;script&gt; and &lt;/script&gt; within the body will be interpreted as JavaScript code. Since the code we write in the HTML file is executed when it appears in the HTML code, we need to make sure that whenever we refer to an element on the page, this element already exists. An easy way to ensure this is to include scripts just before the end of the body element.
-Just like we did with styles, we can outsource our code into a separate file with the extension `.js`.
+We've learned how to integrate text and graphical objects into our page and we 
+also know how to publish it. So far, we might as well just create a plot 
+elsewhere and publish it as an image. But wouldn't it be much better, if the 
+user could interact with the data? To do that, we need to learn a little 
+scripting, and, again, HTML provides a scripting environment.
 
-So, let's go back to using the cat image for now. We want the cat to acknowledge that we click on it.
-First we need to create our `interaction.js` file and link to it in the HTML body.
+Everything between `<script>` and `</script>` within the body will be 
+interpreted as JavaScript code. Since the code we write in the HTML file is 
+executed when it appears in the HTML code, we need to make sure that whenever we
+refer to an element on the page, this element already exists. An easy way to 
+ensure this is to include scripts just before the end of the body element.
+
+Just like we did with styles, we can outsource our code into a separate file 
+with the extension `.js`.
+
+So, let's go back to using the cat image for now. We want the cat to acknowledge
+that we click on it. First we need to create our `interaction.js` file and link
+to it in the HTML body.
 
 ~~~{.html}
 <script src="interaction.js"></script>
@@ -25,9 +36,12 @@ First we need to create our `interaction.js` file and link to it in the HTML bod
 
 We need to introduce the script to the HTML element, using these basic steps:
 
-* Set up a link between HTML and the script by giving the HTML element we want to interact with a unique ID.
-* Retrieving the element and assigning it to a variable in the script that we can work with.
-* Detect the action we are interested in, i.e. button click using an event listener.
+* Set up a link between HTML and the script by giving the HTML element we want
+  to interact with a unique ID.
+* Retrieving the element and assigning it to a variable in the script that we 
+  can work with.
+* Detect the action we are interested in, i.e. button click using an event 
+  listener.
 * Do things.
 
 The ID is an attribute we can set for the image:
@@ -38,7 +52,8 @@ The ID is an attribute we can set for the image:
 </div>
 ~~~
 
-Using `getElementById`, we can grab the element from `document` (a magical object representing the entire page) and work with it in the JavaScript file.
+Using `getElementById`, we can grab the element from `document` (a pre-defined 
+object representing the entire page) and work with it in the JavaScript file.
 
 ~~~{.js}
 var cat_image = document.getElementById('cat');
@@ -53,8 +68,11 @@ var cat_image = document.getElementById('cat');
 cat_image.addEventListener("click", meow);
 ~~~
 
-Our event listener takes two arguments: the type of event and a callback: a function that explains what we want it to do when the event fires.
-We want to execute a function called `meow`, which will open a pop-up window. We can use the JavaScript function alert().
+Our event listener takes two arguments: the type of event and a callback: a 
+function that explains what we want it to do when the event fires.
+
+We want to execute a function called `meow`, which will open a pop-up window. 
+We can use the JavaScript function `alert()`.
 
 ~~~{.js}
 function meow() {
@@ -62,7 +80,10 @@ function meow() {
 };
 ~~~
 
-If we want to execute a sequence of functions, we can also create something that's called `inline` function, that is only defined in the scope of this specific callback. Within this function, we can call `meow()`, but also othe functions, like `purr()` (which doesn't exist, yet).
+If we want to execute a sequence of functions, we can also create something 
+that's called `inline` function, that is only defined in the scope of this 
+specific callback. Within this function, we can call `meow()`, but also othe 
+functions, like `purr()` (which doesn't exist, yet).
 
 ~~~{.js}
 var cat_image = document.getElementById('cat');
@@ -92,7 +113,7 @@ cat_image.addEventListener("click", function() {
 > * Sources - Here, we can look at the files that are used by our page. And even better, if we navigate to the JavaScript file, we can add breakpoints that stay in place when we reload the page. This allows us to investigate values of variables on the spot.
 
 > ## Feed your pet cat {.challenge}
-> Create a button using the &lt;button&gt; element to feed the cat using the steps outlined earlier.
+> Create a button using the `<button>` element to feed the cat using the steps outlined earlier.
 > Use the alert() function to have the cat thank you.
 
 The next step to having a fully interactive page is to
@@ -103,15 +124,18 @@ We have to link to both the cat element and the food button so that
 both files know what we're talking about.
 
 We're setting the width by stringing a few words together:
-'cat_image.style.width'.
-We can think of 'cat_image' as having an attribute called 'style', which in turn has an attribute
-called 'width'.
-Let's add a couple of grams.
-We have to retrieve the current object width. Our 'cat_image' object also has a
-attribute called 'offsetWidth'. This will give us the current width as a number (as
-opposed to the string '200px').
+`cat_image.style.width`.
+
+We can think of `cat_image` as having an attribute called `style`, which in turn
+has an attribute called `width`.
+
+Let's add a couple of grams. We have to retrieve the current object width. Our 
+`cat_image` object also has a attribute called `offsetWidth`. This will give us
+the current width as a number (as opposed to the string '200px').
+
 Google is your friend here. Use it to find out these handy functions.
-Lastly we have to append the new value with 'px'.
+
+Lastly we have to append the new value with `px`.
 
 ~~~{.js}
 var cat_image = document.getElementById('cat');
@@ -126,15 +150,16 @@ function feed() {
 We could also pass an argument into the `feed` function by writing it in the brackets.
 We might, for example, want the user to be able to decide the meal size the cat eats.
 
-We can also return a value and assign it to a variable (just like we do with any function we used so far, e.g. var element = document.getElementById("someID");):
+We can also return a value and assign it to a variable (just like we do with any
+function we used so far, e.g. `var element = document.getElementById("someID");`):
 
 ~~~{.js}
-var new_width = feed(10);
-
-function feed(mealsize) {
-		cat_image.style.width = (cat_image.offsetWidth + parseInt(mealsize)) + 'px';
-		return cat_image.style.width;
+function feed (mealsize) {
+	cat_image.style.width = (cat_image.offsetWidth + Number(mealsize)) + 'px';
+	return cat_image.style.width;
 };
+
+var new_width = feed(10);
 ~~~
 
 In JavaScript there are two main data types: strings (text, everything in quotes)
@@ -157,7 +182,6 @@ We've also just used that, when we concatenated
 > * contextmenu - Right click
 > * mouseover - Mouse moved over an element
 > * keypress - Key pressed on keyboard
-
 
 > ## Let the cat work out  {.challenge}
 > Create a second button 'run around the block', that makes the cat slimmer again.
