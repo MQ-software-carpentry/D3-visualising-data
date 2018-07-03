@@ -1,6 +1,6 @@
 // Load the data.
 var dataUrl = "https://raw.githubusercontent.com/MQ-software-carpentry/D3-visualising-data/gh-pages/code/nations.json";
-d3.json(dataUrl, function(nations) {
+d3.json(dataUrl).then(function(nations) {
 
 	// Create the SVG frame inside chart_area.
 	var chart_area = d3.select("#chart_area");
@@ -16,7 +16,7 @@ d3.json(dataUrl, function(nations) {
 	var canvas_width = frame_width - margin.left - margin.right;
 	var canvas_height = frame_height - margin.top - margin.bottom;
 
-	
+
 	// Set svg attributes width and height.
 	frame.attr("width", frame_width);
 	frame.attr("height", frame_height);
@@ -25,4 +25,4 @@ d3.json(dataUrl, function(nations) {
 	// Shift the chart and make it slightly smaller than the svg canvas.
 	canvas.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-})
+});

@@ -38,7 +38,7 @@ Instead of spreading this code over three lines, we often find another notation
 online that achieves the same thing:
 
 ~~~{.js}
-var xScale = d3.scaleLog().domain([300, 1e5]).range([0, canvas_width]);
+var xScale = d3.scaleLog().domain([250, 1e5]).range([0, canvas_width]);
 ~~~
 
 These two notations are interchangeable and it is entirely up to you to use the

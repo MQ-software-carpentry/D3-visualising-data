@@ -34,7 +34,7 @@ Then create `index.html` in the new repository containing the following:
 
     <div id="chart_area"></div>
 
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="main.js"></script>
   </body>
 </html>
